@@ -2,28 +2,16 @@ package study.inno.day3.homework;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.TreeSet;
 
 public class MathBox extends ObjectBox {
 
-//    private int fHashCode;
-//    private boolean fHashCodeCalculated;
-
-//    private void calcHashCode(){
-//        fHashCode = Objects.hash(fValues);
-//        fHashCodeCalculated = true;
-//    }
-//
-//    private void clearHashCode(){
-//        fHashCodeCalculated = false;
-//    }
-
     public MathBox(Integer[] aValues) throws Exception {
-        super(new TreeSet<Object>((aFirst, aSecond) -> Double.compare(((Number) aFirst).doubleValue(), ((Number) aSecond).doubleValue())));
+        super(new TreeSet<>(Comparator.comparingDouble(value -> ((Number) value).doubleValue())));
         fValues.addAll(Arrays.asList(aValues));
 
         if (fValues.size() != aValues.length) throw new Exception("input array contains duplicates");
-
     }
 
     public double summator() {
@@ -51,22 +39,11 @@ public class MathBox extends ObjectBox {
     @Override
     public int hashCode() {
         return fValues.hashCode();
-//        if(!fHashCodeCalculated)calcHashCode();
-
-//        return fHashCode;
     }
 
     @Override
     public boolean equals(Object aObj) {
-        if (this == aObj) return true;
-        else if (!(aObj instanceof MathBox)) return false;
-        else {
-//            MathBox vObj = (MathBox) aObj;
-
-//            if(fHashCodeCalculated && vObj.fHashCodeCalculated && fHashCode != vObj.fHashCode)return false;
-//            else return this.fValues.equals(vObj.fValues);
-            this.fValues.equals(((MathBox) aObj).fValues);
-        }
+        return (this == aObj) || (aObj instanceof MathBox && this.fValues.equals(((MathBox) aObj).fValues));
     }
 
     @Override
@@ -78,7 +55,7 @@ public class MathBox extends ObjectBox {
     @Override
     public void deleteObject(Object aObj) {
         if (aObj instanceof Number) {
-            fValues.remove((Number) aObj);
+            fValues.remove(aObj);
         }
     }
 }
