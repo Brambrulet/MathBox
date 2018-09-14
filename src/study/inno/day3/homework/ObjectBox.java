@@ -1,9 +1,10 @@
 package study.inno.day3.homework;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class ObjectBox {
+public class ObjectBox implements Serializable {
     protected Collection<Object> fValues;
 
     public ObjectBox() {

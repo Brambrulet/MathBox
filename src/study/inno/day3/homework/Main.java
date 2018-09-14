@@ -1,5 +1,7 @@
 package study.inno.day3.homework;
 
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.math.BigDecimal;
 
 public class Main {
@@ -37,8 +39,13 @@ public class Main {
             System.out.println("MathBox:");
             System.out.println(vMaths.toString());
 
+            try (ObjectOutputStream vStream = new ObjectOutputStream(new FileOutputStream("MathBox.bin"))) {
+                vStream.writeObject(vMaths);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 }
